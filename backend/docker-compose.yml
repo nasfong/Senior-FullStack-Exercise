@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: backend_app
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - backend_network  # This connects to the shared network
+
+networks:
+  backend_network:
+    external: true  # Reuse the same external network
