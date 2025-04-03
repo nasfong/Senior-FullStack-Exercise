@@ -1,15 +1,18 @@
 import { Router } from 'express'
-import { readAllData } from '../controllers/courseController'
-import { createStudent, deleteStudent, getAllStudents, updateStudent } from '../controllers/studentController'
+import { courseController, studentController } from '../controllers';
 
 const router = Router()
 
-router.get('/course', readAllData)
+// Course
+router.get('/course', courseController.getAllCourses)
+router.post('/student', courseController.createCourse)
+router.put('/student/:id', courseController.updateCourse)
+router.delete('/student/:id', courseController.deleteCourse)
 
-
-router.get('/student', getAllStudents)
-router.post('/student', createStudent)
-router.put('/student/:id', updateStudent)
-router.delete('/student/:id', deleteStudent)
+// Student
+router.get('/student', studentController.getAllStudents)
+router.post('/student', studentController.createStudent)
+router.put('/student/:id', studentController.updateStudent)
+router.delete('/student/:id', studentController.deleteStudent)
 
 export default router 

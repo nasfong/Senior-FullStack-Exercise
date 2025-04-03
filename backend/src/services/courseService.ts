@@ -1,15 +1,18 @@
-import Course from "../models/course";
+import Course, { ICourse } from "../models/course";
 
-// export const searchCourses = async (search: string) => {
-//   if (!search) {
-//     throw new Error("Query is required");
-//   }
+export const getAllCourses = async () => {
+  return await Course.find().select("-__v");
+};
 
-//   return await Course.find({ $text: { $search: search } });
-// };
+export const createCourse = async (courseData: ICourse) => {
+  const course = new Course(courseData);
+  return await course.save();
+};
 
-export const searchCourses = async () => {
+export const updateCourse = async (id: string, courseData: ICourse) => {
+  return await Course.findByIdAndUpdate(id, courseData, { new: true, runValidators: true });
+};
 
-
-  return await Course.find();
+export const deleteCourse = async (id: string) => {
+  return await Course.findByIdAndDelete(id);
 };
