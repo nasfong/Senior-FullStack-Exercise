@@ -1,7 +1,7 @@
 import Course, { ICourse } from "../models/course";
 
 export const getAllCourses = async () => {
-  return await Course.find().select("-__v");
+  return await Course.find()
 };
 
 export const createCourse = async (courseData: ICourse) => {

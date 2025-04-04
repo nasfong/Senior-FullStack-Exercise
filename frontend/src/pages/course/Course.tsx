@@ -21,11 +21,13 @@ const Course = () => {
   const { data, isLoading } = useQueryCourses()
   const { mutateAsync: deleteMutateAsync, isPending: deleteLoading } = useDeleteCourse()
 
+  // handle dialog edit
   const onEdit = (value: Course) => {
     setFormValue(value);
     setOpen(true);
   };
 
+  // handle dialog delete
   const onDelete = (id: string) => {
     return deleteMutateAsync(id)
       .then(() => true) // true close alert

@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import {
   Dialog,
   DialogContent,
@@ -9,9 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useSubmitCourse } from "@/hook/course";
 import { InputForm } from "@/components/custom/input-form";
@@ -33,17 +34,26 @@ export const CourseDialog = ({
 
   const formSchema = z.object({
     name: z.string().nonempty("required"),
+    description: z.string().nonempty("required"),
+    capacity: z.number(),
+    price: z.number(),
   });
 
   // default value
   const defaultValues = {
     name: "",
+    description: "",
+    capacity: 0,
+    price: 0,
   };
+
   // hook form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues,
   });
+
+  // handle dialog
   const onChangeModal = (isOpen: boolean) => {
     setOpen(isOpen);
     if (!isOpen) {
@@ -52,21 +62,25 @@ export const CourseDialog = ({
       setFormValue(null);
     }
   };
-  // handle submit
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    mutateAsync(data).finally(() => {
-      onChangeModal(false);
-    });
-  };
 
   // get edit
   useEffect(() => {
     if (formValue) {
       form.reset({
         name: formValue.name,
+        description: formValue.description,
+        capacity: formValue.capacity,
+        price: formValue.price,
       });
     }
   }, [form, formValue]);
+
+  // handle submit
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    mutateAsync(data).finally(() => {
+      onChangeModal(false);
+    });
+  };
 
   return (
     <Dialog open={open} onOpenChange={onChangeModal}>
@@ -84,6 +98,9 @@ export const CourseDialog = ({
             className="flex flex-col gap-2"
           >
             <InputForm name="name" label="Name" placeholder="Name" required />
+            <InputForm name="description" label="Description" placeholder="Description" required />
+            <InputForm name="capacity" type="number" label="Capacity" placeholder="Capacity" required />
+            <InputForm name="price" type="number" label="Price" placeholder="Price" required />
 
             <DialogFooter className="mt-3">
               <Button type="submit" loading={isPending}>

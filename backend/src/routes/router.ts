@@ -5,9 +5,9 @@ const router = Router()
 
 // Course
 router.get('/course', courseController.getAllCourses)
-router.post('/student', courseController.createCourse)
-router.put('/student/:id', courseController.updateCourse)
-router.delete('/student/:id', courseController.deleteCourse)
+router.post('/course', courseController.createCourse)
+router.put('/course/:id', courseController.updateCourse)
+router.delete('/course/:id', courseController.deleteCourse)
 
 // Student
 router.get('/student', studentController.getAllStudents)

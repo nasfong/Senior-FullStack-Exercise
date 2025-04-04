@@ -1,22 +1,22 @@
+import { ErrorResponse } from "@/types/error";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 
-export const useQueryCourses = ({ fetch = true } = {}) => {
+export const useQueryCourses = () => {
   return useQuery<Course[]>({
     queryKey: ["courses"],
     queryFn: async () => {
-      try {
-        const response = await axios.get("/course");
-        return response.data;
-      } catch (error: any) {
-        const errorMessage = error.response?.data?.message || error.message || "Failed to fetch courses";
-        toast.error(`Error fetching courses: ${errorMessage}`);
-        throw error; // Ensures React Query knows the request failed
-      }
-    },
-    enabled: fetch,
-
+      return await axios.get("/course")
+        .then(response => {
+          return response.data;  // Return the data if the request is successful
+        })
+        .catch((error: ErrorResponse) => {
+          const errorMessage = error.response?.data?.message || error.message || "Failed to fetch courses";
+          toast.error(`Error fetching courses: ${errorMessage}`);
+          throw error;  // Rethrow the error to make sure React Query handles it
+        });
+    }
   });
 };
 
@@ -51,18 +51,9 @@ export const useSubmitCourse = (id?: string) => {
   return useMutation({
     mutationFn: (data: any): Promise<any> => {
       if (id) {
-        return axios
-          .put(`/course/${id}`, data, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            }
-          })
+        return axios.put(`/course/${id}`, data)
       } else {
-        return axios.post(`/course`, data, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          }
-        })
+        return axios.post(`/course`, data)
       }
     },
     onSuccess: () => {
