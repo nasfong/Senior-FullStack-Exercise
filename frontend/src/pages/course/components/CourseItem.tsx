@@ -1,53 +1,26 @@
-import { DeleteDialog } from "@/components/custom/delete-dialog"
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Pencil, Trash2 } from "lucide-react"
+import { formatPrice } from "@/lib/utils"
 
 type CourseItemProps = {
   item: Course
-  deleteLoading: boolean
-  onEdit: (item: Course) => void
-  onDelete: (id: string) => void
 }
 
-export const CourseItem = ({ item, deleteLoading, onEdit, onDelete }: CourseItemProps) => {
+export const CourseItem = ({ item }: CourseItemProps) => {
   return (
-    <>
-      <div className='h-full rounded-lg border overflow-hidden dark:bg-black relative border-black dark:border-white transform hover:-translate-y-1 transition-transform duration-100 shadow'>
-        <div className='w-[80%] border-t border-gray-300 dark:border-gray-600 mx-auto'></div>
-        <div className='flex flex-col justify-between h-[80px] px-2 pb-2'>
-          <h2 className="text-lg text-ellipsis overflow-hidden">{item.name}</h2>
+    <div className="relative flex flex-col bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200 min-h-[267px] p-6">
+      <div className="flex flex-col justify-between flex-grow">
+        <div>
+          <h2 className="text-3xl font-semibold text-gray-800 mb-2">{item.name}</h2>
+          <p className="text-gray-600 text-sm truncate mb-4">{item.description}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-xl font-semibold text-gray-900 mt-auto">{formatPrice(item.price)}</p>
+          <Button size="sm">
+            <Link to={`/register/${item.id}`}>Register</Link>
+          </Button>
         </div>
       </div>
-      <div className='absolute top-2 left-2 flex gap-1'>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button size='sm' variant='outline' onClick={() => onEdit(item)}>
-                <Pencil className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              Edit
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DeleteDialog handleConfirm={() => onDelete(item.id)} loading={deleteLoading} >
-                <Button size='sm' variant='outline'>
-                  <Trash2 />
-                </Button>
-              </DeleteDialog>
-            </TooltipTrigger>
-            <TooltipContent>
-              Delete
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    </>
+    </div>
   )
 }
-

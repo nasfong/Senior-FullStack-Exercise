@@ -1,18 +1,34 @@
-import { Outlet, Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { NavLink, Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 
 const Layout = () => {
   return (
     <div>
       {/* Navigation Menu */}
-      <nav style={{ padding: "10px", background: "#eee", display: "flex", gap: "15px" }}>
-        <Link to="/course">Course</Link>
-        <Link to="/student">Student</Link>
-        <Link to="/enrollment">Enrollment</Link>
+      <nav className="p-4 bg-gray-100 flex gap-6">
+        <NavLink
+          to="/course"
+          className={({ isActive }) =>
+            cn("text-lg font-medium", isActive ? "text-blue-600" : "text-gray-600")
+          }
+        >
+          Course
+        </NavLink>
+        <NavLink
+          to="/enrollment"
+          className={({ isActive }) =>
+            cn("text-lg font-medium", isActive ? "text-blue-600" : "text-gray-600")
+          }
+        >
+          Enrollment
+        </NavLink>
       </nav>
 
       {/* Page Content */}
-      <main style={{ padding: "20px" }}>
+      <main className="p-5">
         <Outlet />
+        <Toaster />
       </main>
     </div>
   );

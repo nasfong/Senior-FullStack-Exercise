@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - "--api.insecure=true"  # Enable the dashboard (optional)
+      - "--providers.docker=true"  # Enable Docker provider
+      - "--entrypoints.web.address=:80"  # HTTP
+      - "--entrypoints.websecure.address=:443"  # HTTPS
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"  # Let’s Encrypt HTTP challenge
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"  # Use the web entrypoint for HTTP challenge
+      - "--certificatesresolvers.myresolver.acme.email=fongren007@gmail.com"  # Replace with your email
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"  # Storage for certs
+    ports:
+      - "80:80"  # HTTP
+      - "443:443"  # HTTPS
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"  # Allow Traefik to interact with Docker
+      - "./letsencrypt:/letsencrypt"  # Store Let's Encrypt certificates
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"  # Allow Portainer to access Docker
+      - "portainer_data:/data"  # Store Portainer data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`nasfong.site`, `www.nasfong.site`)"  # Direct traffic for nasfong.site to Portainer
+      - "traefik.http.routers.portainer.entrypoints=websecure"  # Use HTTPS
+      - "traefik.http.routers.portainer.tls=true"  # Enable TLS
+      - "traefik.http.routers.portainer.tls.certresolver=myresolver"  # Use the cert resolver for SSL
+    restart: always
+
+volumes:
+  portainer_data:

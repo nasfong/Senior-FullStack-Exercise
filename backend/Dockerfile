@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
 
+# Install the dependencies
+RUN npm install
+
 # Copy only necessary application files (public and src)
 COPY src ./src
 

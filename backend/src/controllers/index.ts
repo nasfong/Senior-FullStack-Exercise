@@ -1,2 +1,2 @@
-export * as courseController from "./courseController";
-export * as studentController from "./studentController";
+export * as courseController from './courseController'
+export * as registerController from './registerController'

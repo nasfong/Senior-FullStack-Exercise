@@ -1,18 +1,18 @@
-import Student, { IStudent } from "../models/student";
+import Student from "../models/student";
+import { IStudent } from "../models/student"; 
 
-export const getAllStudents = async () => {
-  return await Student.find().select("-__v");
-};
+export const create = async (studentData: { name: string, phone: string, email?: string }): Promise<IStudent> => {
+  try {
+    const newStudent = new Student({
+      name: studentData.name,
+      phone: studentData.phone,
+      email: studentData.email,
+    });
 
-export const createStudent = async (studentData: IStudent) => {
-  const student = new Student(studentData);
-  return await student.save();
-};
+    await newStudent.save();
 
-export const updateStudent = async (id: string, studentData: IStudent) => {
-  return await Student.findByIdAndUpdate(id, studentData, { new: true, runValidators: true });
-};
-
-export const deleteStudent = async (id: string) => {
-  return await Student.findByIdAndDelete(id);
+    return newStudent;
+  } catch (error) {
+    throw new Error("Error creating student");
+  }
 };

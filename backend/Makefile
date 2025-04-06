@@ -1,5 +1,5 @@
 # Define variables
-IMAGE_NAME = nasfong/backend_app
+IMAGE_NAME = nasfong/backend_school
 TAG = latest
 DOCKERFILE_PATH = .
 DOCKERFILE_PROD = Dockerfile.production  # Specify the production Dockerfile
