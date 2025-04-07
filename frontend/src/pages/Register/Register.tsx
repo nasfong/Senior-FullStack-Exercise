@@ -117,6 +117,7 @@ const Register = () => {
               onChange={handleSelectChange}
               className="mt-2 p-2 border rounded-md"
               disabled={courseLoading}
+              required
             >
               <option value="">Select a Course</option>
               {courseData?.map((course) => (
@@ -141,6 +142,7 @@ const Register = () => {
               onChange={handleInputChange}
               placeholder="Student Name"
               className="mt-2 p-2 border rounded-md"
+              required
             />
           </div>
 
@@ -157,6 +159,7 @@ const Register = () => {
               onChange={handleInputChange}
               placeholder="Phone"
               className="mt-2 p-2 border rounded-md"
+              required
             />
           </div>
 
