@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import * as enrollmentService from "../services/enrollmentService";
 import * as studentService from "../services/studentService";
 
-import Enrollment from "../models/enrollment";
 import Course from "../models/course";
 
 export const findAll = async (req: Request, res: Response) => {
