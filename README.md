@@ -38,6 +38,30 @@ The system is designed to handle growth—whether adding more students, courses,
 
 ---
 
+Senior-Fullstack-Exercise/
+├── backend/
+│   ├── controllers/
+│   ├── models/            # JS/TS hybrid models
+│   ├── routes/
+│   ├── utils/
+│   ├── tests/             # Jest tests
+│   └── server.ts          # Express app
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── layout/
+│   │   ├── lib/
+│   │   ├── providers/     # Tanstack Query & Axios 
+│   │   ├── pages/
+│   │   ├── types/
+│   │   ├── tests/         # React Testing Library tests
+│   │   └── App.tsx
+│   │   └── main.tsx
+│   ├── vite.config.ts
+├── README.md
+
+---
+
 ## 🚀 Features
 
 ### 🔙 Backend
@@ -68,12 +92,6 @@ The system is designed to handle growth—whether adding more students, courses,
 
 ---
 
-Senior-Fullstack-Exercise/ │ ├── backend/ │ ├── controllers/ │ ├── models/ # JS/TS hybrid │ ├── routes/ │ ├── utils/ │ ├── tests/ # Jest tests │ └── server.ts # Express app │ ├── frontend/ │ ├── src/ │ │ ├── components/ │ │ ├── pages/ │ │ ├── services/ # API calls │ │ ├── hooks/ │ │ ├── tests/ │ │ └── App.tsx │ └── vite.config.ts │ └── README.md
-
-
-
----
-
 ## 📦 Installation & Running the App
 
 ### Prerequisites
@@ -83,4 +101,4 @@ Senior-Fullstack-Exercise/ │ ├── backend/ │ ├── controllers/ │
 ### Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/student-course-enrollment.git
+git clone https://github.com/nasfong/Senior-FullStack-Exercise.git
