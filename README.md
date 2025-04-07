@@ -7,12 +7,14 @@ A full-stack Student Course Enrollment System built with the **MERN stack** (Mon
 ## 🔧 Tech Stack
 
 ### 🖥 Backend
+
 - Node.js & Express.js
 - JavaScript → gradually migrated to TypeScript
 - MongoDB & Mongoose
 - Jest for unit testing
 
 ### 💻 Frontend
+
 - React.js (Vite)
 - React Testing Library & Jest
 - TailwindCSS / ShadCN (optional styling library)
@@ -25,7 +27,6 @@ A full-stack Student Course Enrollment System built with the **MERN stack** (Mon
 This Student Course Enrollment System is designed with scalability in mind. Key considerations include:
 
 - **Modular Backend**: The project structure allows for easy scaling by adding more API endpoints, services, and controllers. As your application grows, you can easily expand with additional features like course categories, user roles, and more.
-  
 - **MongoDB Flexibility**: MongoDB's flexible schema allows the database to adapt to changing requirements without complex migrations. Adding new data models or fields is straightforward.
 
 - **TypeScript**: With TypeScript integration, the codebase is more maintainable, safer, and easier to scale by catching errors early during development. Type safety ensures that the backend can scale efficiently with fewer bugs and improved developer experience.
@@ -40,24 +41,24 @@ The system is designed to handle growth—whether adding more students, courses,
 
 Senior-Fullstack-Exercise/
 ├── backend/
-│   ├── controllers/
-│   ├── models/            # JS/TS hybrid models
-│   ├── routes/
-│   ├── utils/
-│   ├── tests/             # Jest tests
-│   └── server.ts          # Express app
+│ ├── controllers/
+│ ├── models/ # JS/TS hybrid models
+│ ├── routes/
+│ ├── utils/
+│ ├── tests/ # Jest tests
+│ └── server.ts # Express app
 ├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── layout/
-│   │   ├── lib/
-│   │   ├── providers/     # Tanstack Query & Axios 
-│   │   ├── pages/
-│   │   ├── types/
-│   │   ├── tests/         # React Testing Library tests
-│   │   └── App.tsx
-│   │   └── main.tsx
-│   ├── vite.config.ts
+│ ├── src/
+│ │ ├── components/
+│ │ ├── layout/
+│ │ ├── lib/
+│ │ ├── providers/ # Tanstack Query & Axios
+│ │ ├── pages/
+│ │ ├── types/
+│ │ ├── tests/ # React Testing Library tests
+│ │ └── App.tsx
+│ │ └── main.tsx
+│ ├── vite.config.ts
 ├── README.md
 
 ---
@@ -65,6 +66,7 @@ Senior-Fullstack-Exercise/
 ## 🚀 Features
 
 ### 🔙 Backend
+
 - **JavaScript API Endpoints** (initial setup)
   - Get available courses
 - **TypeScript Integration**
@@ -75,19 +77,20 @@ Senior-Fullstack-Exercise/
 - **Validation & Error Handling**
   - Graceful handling of edge cases and bad input
 - **Unit Tests**
-  - Coverage across both JS and TS endpoints using Jest
+  - Coverage TS endpoints using Jest
 
 ### 🎨 Frontend
+
 - View all available courses
 - Search for courses (real-time or triggered search)
 - Enroll in courses using a form
 - View enrolled courses by student
 - UI feedback for loading, success, and errors
-- Component-level unit testing with mocks/stubs
 
 ### 🗄️ Database Schemas
-- **Students**: ID, name, etc.
-- **Courses**: ID, name, description, capacity
+
+- **Students**: ID, name, phone, email.
+- **Courses**: ID, name, description, capacity, price
 - **Enrollments**: student ID, course ID, date
 
 ---
@@ -95,6 +98,7 @@ Senior-Fullstack-Exercise/
 ## 📦 Installation & Running the App
 
 ### Prerequisites
+
 - Node.js v20+
 - MongoDB instance (cloud)
 
@@ -102,3 +106,4 @@ Senior-Fullstack-Exercise/
 
 ```bash
 git clone https://github.com/nasfong/Senior-FullStack-Exercise.git
+```
