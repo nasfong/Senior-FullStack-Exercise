@@ -1,23 +1,15 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { EnrollmentItem } from "./components/EnrollmentItem";
 
-
 const Enrollment = () => {
 
-  // query course list
+  // query enrollment list
   const { data, isLoading, error } = useQuery<Enrollment[]>({
-    queryKey: ['register'],
+    queryKey: ['enrollment'],
     queryFn: async () => {
-      const response = await axios.get('/register'); // Adjust the URL as necessary
+      const response = await axios.get('/enrollment'); // Adjust the URL as necessary
       return response.data;
     }
   });
@@ -30,19 +22,20 @@ const Enrollment = () => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <Card>
-        <CardHeader>
-          <CardTitle>Enrollment</CardTitle>
-          <CardDescription></CardDescription>
-        </CardHeader>
-        <CardContent>
-          <EnrollmentItem
-            data={data}
-            isLoading={isLoading}
-          />
-        </CardContent>
-      </Card>
+    <div className="flex flex-col gap-4 p-4">
+      {/* Enrollment Header */}
+      <div className="mb-4">
+        <h1 className="text-2xl font-semibold">Enrollment</h1>
+        <p className="text-sm text-gray-500">Manage your course enrollments here.</p>
+      </div>
+
+      {/* Enrollment List */}
+      <div className="min-h-[100px]">
+        <EnrollmentItem
+          data={data}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 };

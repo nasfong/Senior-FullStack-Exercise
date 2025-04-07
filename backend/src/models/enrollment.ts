@@ -1,8 +1,8 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface IEnrollmentInput {
-  course: Types.ObjectId;
-  student: Types.ObjectId;
+  course: mongoose.Types.ObjectId;
+  student: mongoose.Types.ObjectId;
   date: Date;
 }
 

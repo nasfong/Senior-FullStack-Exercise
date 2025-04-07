@@ -1,41 +1,34 @@
 import Course from '../../models/course';
 import * as courseService from '../../services/courseService';
 
-// 👇 Mock the entire Course model module
-jest.mock('../../models/course', () => ({
-  __esModule: true,
-  default: {
-    find: jest.fn(), // mock `find` method
-  },
-}));
+describe('Course', () => {
+  beforeEach(async () => {
+    // Clear the database and create new test courses before each test
+    await Course.create({ name: 'Course 1', description: 'Description 1', price: 100, capacity: 30, });
+    await Course.create({ name: 'Course 2', description: 'Description 2', price: 200, capacity: 30, });
+  });
 
-describe('UserService with MongoMemoryServer', () => {
-  jest.setTimeout(30000);
+  describe('Get List Courses', () => {
+    it('should return a list of courses', async () => {
+      // Call the actual service method to retrieve all courses
+      const result = await courseService.findAll();
 
-  describe('courseController', () => {
-    describe('findAll', () => {
-      it('should return a list of courses', async () => {
-        const mockCourses = [
-          { name: 'Course 1', description: 'Description 1' },
-          { name: 'Course 2', description: 'Description 2' },
-        ];
+      // Check that the result matches the expected courses
+      expect(result).toHaveLength(2);
+      expect(result[0].name).toBe('Course 1');
+      expect(result[1].name).toBe('Course 2');
+    });
+  });
 
-        (Course.find as jest.Mock).mockResolvedValue(mockCourses);
+  describe('Search Courses', () => {
+    it('should return a list of courses', async () => {
+      // Call the actual service method to retrieve all courses
+      const q = 'Course 1'
+      const result = await courseService.findAll(q);
 
-        const result = await courseService.findAll();
-
-        expect(result).toEqual(mockCourses);
-        expect(Course.find).toHaveBeenCalledTimes(1);
-      });
-
-      it('should return an empty list if no courses are found', async () => {
-        (Course.find as jest.Mock).mockResolvedValue([]);
-
-        const result = await courseService.findAll();
-
-        expect(result).toEqual([]);
-        expect(Course.find).toHaveBeenCalledTimes(1);
-      });
+      // Check that the result matches the expected courses
+      expect(result).toHaveLength(1);
+      expect(result[0].name).toBe('Course 1');
     });
   });
 });

@@ -1,3 +1,3 @@
 export * as courseService from './courseService'
-export * as registerService from './registerService'
+export * as enrollmentService from './enrollmentService'
 export * as studentService from './studentService'

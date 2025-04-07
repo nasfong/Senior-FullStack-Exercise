@@ -1,1 +1,8 @@
-# .env
+node_modules
+Dockerfile
+.dockerignore
+.git
+.gitignore
+Makefile
+.vscode
+README.md
