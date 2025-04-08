@@ -38,7 +38,7 @@ This Student Course Enrollment System is designed with scalability in mind. Key 
 The system is designed to handle growth—whether adding more students, courses, or features—while maintaining performance and ease of maintenance.
 
 ---
-
+```bash
 Senior-Fullstack-Exercise/
 ├── backend/
 │ ├── controllers/
@@ -57,7 +57,7 @@ Senior-Fullstack-Exercise/
 │ │ └── main.tsx
 │ ├── vite.config.ts
 ├── README.md
-
+```
 ---
 
 ## 🚀 Features
