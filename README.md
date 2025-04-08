@@ -50,12 +50,9 @@ Senior-Fullstack-Exercise/
 ├── frontend/
 │ ├── src/
 │ │ ├── components/
-│ │ ├── layout/
 │ │ ├── lib/
-│ │ ├── providers/ # Tanstack Query & Axios
 │ │ ├── pages/
 │ │ ├── types/
-│ │ ├── tests/ # React Testing Library tests
 │ │ └── App.tsx
 │ │ └── main.tsx
 │ ├── vite.config.ts
