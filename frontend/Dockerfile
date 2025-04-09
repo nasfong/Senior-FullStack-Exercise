@@ -1,30 +1,23 @@
-# Use official Node.js image as the base image
-FROM node:20-alpine AS build
+# Use lightweight Node.js image
+FROM node:20-alpine
 
-# Set the working directory inside the container
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock)
+# Copy package.json and package-lock.json to install dependencies first
 COPY package*.json ./
 
-# Install the dependencies
-RUN npm install
+# Install dependencies (use --legacy-peer-deps in case of npm issues)
+RUN npm install 
 
-# Copy the rest of the application code
+# Copy the rest of the project files
 COPY . .
 
-# Build the Vite app
-RUN npm run build
+# Expose Vite default development port
+EXPOSE 5173
 
-# Use a smaller image for production
-FROM nginx:alpine
+# Set the environment to development
+ENV NODE_ENV=development
 
-# Copy the build output from the build stage to Nginx's public folder
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80 for the app
-EXPOSE 80
-
-# Run Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Start the Vite development server
+CMD ["npm", "run", "dev", "--", "--host"]

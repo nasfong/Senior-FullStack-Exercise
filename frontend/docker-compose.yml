@@ -6,9 +6,9 @@ services:
       dockerfile: Dockerfile
     container_name: frontend_school
     volumes:
-      - .:/app # Mount local directory to the container
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - .:/app          # Mount the local directory
+      - /app/node_modules  # Avoid overwriting node_modules in the container
     ports:
-      - "80:80" # Expose Vite's default port
+      - "5173:5173"      # Expose Vite's default port
     environment:
       - NODE_ENV=development
