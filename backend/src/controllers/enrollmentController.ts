@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import * as enrollmentService from "../services/enrollmentService";
 import * as studentService from "../services/studentService";
-
 import Course from "../models/course";
 
 export const findAll = async (req: Request, res: Response) => {
   try {
     const courses = await enrollmentService.findAll();
     return res.status(200).json(courses);
-  } catch (error) {
-    return res.status(500).json({ error });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Internal Server Error";
+    return res.status(500).json({ message });
   }
 };
 
@@ -40,12 +40,13 @@ export const create = async (req: Request, res: Response) => {
       student: student.id,
       course: course.id,
       date: new Date(),
-    })
+    });
 
     return res.status(200).json({
       message: "Register successfully",
     });
-  } catch (error: any) {
-    return res.status(400).json({ message: error.message });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Something went wrong";
+    return res.status(400).json({ message });
   }
 };

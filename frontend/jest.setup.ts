@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
-import { TextEncoder, TextDecoder } from 'util';
+import { TextEncoder, TextDecoder } from "util";
 
-// Cast TextEncoder and TextDecoder to 'any' to bypass the type mismatch
-(global as any).TextEncoder = TextEncoder;
-(global as any).TextDecoder = TextDecoder;
+// Explicitly cast to the correct type without using 'any'
+global.TextEncoder = TextEncoder as typeof globalThis.TextEncoder;
+global.TextDecoder = TextDecoder as typeof globalThis.TextDecoder;

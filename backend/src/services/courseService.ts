@@ -5,6 +5,6 @@ export const findAll = async (query?: string) => {
     $text: { $search: query }
   } : {};
 
-  return await Course.find(searchCriteria);
+  return await Course.find(searchCriteria).sort({ capacity: 1 });
 }
 

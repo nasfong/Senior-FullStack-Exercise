@@ -1,4 +1,3 @@
-// CourseModel.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface ICourse extends Document {
@@ -17,5 +16,6 @@ const CourseSchema: Schema = new Schema({
 
 // Full-text search on name and description
 CourseSchema.index({ name: "text", description: "text" });
+CourseSchema.index({ capacity: 1 })
 
 export default mongoose.model<ICourse>("Course", CourseSchema);
